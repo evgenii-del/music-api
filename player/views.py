@@ -13,13 +13,11 @@ class TrackViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(musician=self.request.user)
 
-    def perform_update(self, serializer):
-        print(serializer)
-
 
 class AlbumViewSet(viewsets.ModelViewSet):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
+    permission_classes = (IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly)
 
     def perform_create(self, serializer):
         serializer.save(musician=self.request.user)
