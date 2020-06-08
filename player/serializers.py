@@ -14,7 +14,7 @@ class UserFilteredPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
 
 class TrackSerializer(serializers.ModelSerializer):
     musician = serializers.CharField(read_only=True)
-    album = UserFilteredPrimaryKeyRelatedField(queryset=Album.objects)
+    album = UserFilteredPrimaryKeyRelatedField(queryset=Album.objects, required=False)
 
     class Meta:
         model = Track
