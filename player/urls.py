@@ -29,4 +29,5 @@ urlpatterns = [
     path('tracks/<int:pk>/', track_detail),
     path('albums/', album_list),
     path('albums/<int:pk>/', album_detail),
+    path('genres/', views.GenreViewSet.as_view({'get': 'list'})),
 ]

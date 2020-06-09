@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Track, Album
+from .models import Track, Album, Genre
 
 
 class UserFilteredPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
@@ -12,9 +12,18 @@ class UserFilteredPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
         return queryset.filter(musician=request.user)
 
 
-class TrackSerializer(serializers.ModelSerializer):
-    musician = serializers.CharField(read_only=True)
+class TrackChangeSerializer(serializers.ModelSerializer):
     album = UserFilteredPrimaryKeyRelatedField(queryset=Album.objects, required=False)
+
+    class Meta:
+        model = Track
+        fields = '__all__'
+
+
+class TrackReadSerializer(serializers.ModelSerializer):
+    musician = serializers.CharField(read_only=True)
+    genre = serializers.CharField()
+    album = serializers.CharField()
 
     class Meta:
         model = Track
@@ -23,8 +32,14 @@ class TrackSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
     musician = serializers.CharField(read_only=True)
-    tracks = TrackSerializer(many=True)
+    tracks = TrackReadSerializer(many=True)
 
     class Meta:
         model = Album
+        fields = '__all__'
+
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
         fields = '__all__'
