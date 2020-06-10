@@ -18,6 +18,7 @@ class TrackChangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = '__all__'
+        read_only_fields = ('musician',)
 
 
 class TrackReadSerializer(serializers.ModelSerializer):
@@ -32,7 +33,7 @@ class TrackReadSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
     musician = serializers.CharField(read_only=True)
-    tracks = TrackReadSerializer(many=True)
+    tracks = TrackReadSerializer(many=True, required=False)
 
     class Meta:
         model = Album
