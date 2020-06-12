@@ -12,6 +12,9 @@ SECRET_KEY = 'il8ek3*os-$zkv$v#z5zry^+0ngw1^!)wl5yo$rr^0nlv08+1@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -25,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'django_filters',
     'rest_framework.authtoken',
     'djoser',
@@ -34,6 +38,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # CORS
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -137,3 +142,4 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
+
