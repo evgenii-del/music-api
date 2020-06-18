@@ -21,6 +21,7 @@ Change track:
 
 Delete track:
 **DELETE** `"http://khasanov.pythonanywhere.com/api/v1/tracks/<id>/"`
+
 Fields Album:
  - Title
  - Slug
